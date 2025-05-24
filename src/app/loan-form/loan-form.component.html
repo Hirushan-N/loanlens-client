@@ -1,0 +1,31 @@
+<div class="form-wrapper">
+  <h1>Loan Eligibility Checker</h1>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-group">
+      <input type="number" placeholder="Loan Amount (LKR)" formControlName="loanAmount" />
+    </div>
+
+    <div class="form-group">
+      <input type="number" placeholder="Interest Rate (%)" formControlName="interestRate" />
+    </div>
+
+    <div class="form-group">
+      <input type="number" placeholder="Tenure Duration (Months)" formControlName="tenureMonths" />
+    </div>
+
+    <div class="form-group">
+      <input type="number" placeholder="Monthly Income (LKR)" formControlName="monthlyIncome" />
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">Check Eligibility</button>
+  </form>
+
+  <div class="result-box" *ngIf="result">
+    <h2>{{ result.isEligible ? '✅ Eligible' : '❌ Not Eligible' }}</h2>
+    <p><strong>EMI:</strong> Rs. {{ result.emi | number: '1.2-2' }}</p>
+    <p><strong>EMI Ratio:</strong> {{ result.emiRatio }}%</p>
+    <p><strong>Risk Category:</strong> {{ result.riskCategory }}</p>
+    <p class="note">* This is a preliminary assessment and not a final loan offer.</p>
+  </div>
+</div>

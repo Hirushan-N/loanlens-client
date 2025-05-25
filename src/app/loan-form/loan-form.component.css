@@ -1,8 +1,10 @@
+/* Global styles */
 body {
   background-color: #0b1d33;
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
+  color: #e0f7fa;
 }
 
 /* --- Logo Animation --- */
@@ -32,7 +34,6 @@ body {
 
 .loan-text {
   font-size: 64px;
-  font-family: 'Segoe UI', sans-serif;
   font-weight: 700;
   fill: none;
   stroke: #00e5ff;
@@ -58,7 +59,6 @@ body {
 /* --- Form Container --- */
 .form-wrapper {
   background-color: #0f2a4c;
-  color: #e0f7fa;
   max-width: 500px;
   margin: 60px auto;
   padding: 30px;
@@ -79,6 +79,7 @@ body {
 h1 {
   text-align: center;
   margin-bottom: 24px;
+  font-size: 22px;
 }
 
 /* --- Input Field Styling --- */
@@ -86,7 +87,7 @@ h1 {
   position: relative;
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .input-wrapper input {
@@ -107,23 +108,27 @@ h1 {
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 15px;
-  color: #00e5ff;
-  background: transparent;
   cursor: help;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: transform 0.3s ease, color 0.3s ease;
   z-index: 2;
 }
 
-.invalid-icon-outline:hover {
-  transform: translateY(-50%) scale(1.15);
-  color: #00c6ff;
+.invalid-icon-outline svg {
+  width: 16px;
+  height: 16px;
+  stroke: #00e5ff;
+  stroke-width: 2;
 }
 
-.invalid-icon-outline::before {
-  content: "⚠";
+.invalid-icon-outline:hover svg {
+  stroke: #00c6ff;
+  transform: scale(1.2);
 }
 
+/* Tooltip */
 .invalid-icon-outline::after {
   content: attr(aria-label);
   position: absolute;
@@ -180,10 +185,8 @@ button:focus {
   border-radius: 16px;
   box-shadow: 0 0 14px rgba(0, 229, 255, 0.12);
   margin-top: 30px;
-  color: #e0f7fa;
   animation: fadeIn 0.4s ease-in-out;
   border-left: 4px solid #00e5ff;
-  font-family: 'Segoe UI', sans-serif;
 }
 
 @keyframes fadeIn {
@@ -200,7 +203,8 @@ button:focus {
 }
 
 .status-icon {
-  font-size: 24px;
+  width: 24px;
+  height: 24px;
   margin-right: 10px;
 }
 

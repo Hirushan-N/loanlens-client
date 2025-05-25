@@ -1,5 +1,6 @@
 <div class="splash-container">
   <div class="splash-card">
+    <!-- Logo -->
     <svg class="logo" viewBox="0 0 600 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
       <defs>
         <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -9,25 +10,51 @@
         </linearGradient>
       </defs>
       <g transform="translate(300, 60)">
-        <text text-anchor="middle" alignment-baseline="middle" class="loan-text">
-          LoanLen$
-        </text>
+        <text text-anchor="middle" alignment-baseline="middle" class="loan-text">LoanLen$</text>
       </g>
-    </svg>      
-    
+    </svg>
+
+    <!-- Tagline -->
     <h2 class="tagline">
       <span class="typing-text">
-        Instantly check your loan eligibility with precision. No paperwork. No waiting. Just insight.
+        Check your loan eligibility instantly. No paperwork. No delays. Just insights.
       </span>
     </h2>
 
+    <!-- Features -->
     <ul class="features">
-      <li>✔️ Intelligent EMI-to-Income analysis</li>
-      <li>✔️ Accurate risk classification</li>
-      <li>✔️ Fast, secure & compliant with financial standards</li>
+      <li>
+        <svg class="icon-check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+        </svg>
+        Intelligent EMI-to-Income analysis
+      </li>
+      <li>
+        <svg class="icon-check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+        </svg>
+        Accurate risk classification
+      </li>
+      <li>
+        <svg class="icon-check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/>
+        </svg>
+        Fast, secure & compliant with financial standards
+      </li>
     </ul>
+
+    <!-- Start CTA Button -->
     <button class="start-button" (click)="navigateToForm()">
-      START NOW <span class="arrow">→</span><span class="arrow">→</span><span class="arrow">→</span>
-    </button>    
+      START NOW
+      <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M4 12h16m-6-6 6 6-6 6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M4 12h16m-6-6 6 6-6 6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M4 12h16m-6-6 6 6-6 6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -9,12 +9,10 @@ import { Router } from '@angular/router';
   templateUrl: './splash.component.html',
   styleUrls: ['./splash.component.css']
 })
-export class SplashComponent implements OnInit {
+export class SplashComponent {
   constructor(private router: Router) {}
 
-  ngOnInit(): void {
-    setTimeout(() => {
-      this.router.navigate(['/loan']);
-    }, 2000);
+  navigateToForm(): void {
+    this.router.navigate(['/loan']);
   }
 }

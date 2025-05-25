@@ -1,4 +1,33 @@
 <div class="splash-container">
-  <h1>LoanLens</h1>
-  <p class="powered">Powered by FINAP</p>
+  <div class="splash-card">
+    <svg class="logo" viewBox="0 0 600 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#00e5ff" />
+          <stop offset="50%" stop-color="#00c6ff" />
+          <stop offset="100%" stop-color="#0080ff" />
+        </linearGradient>
+      </defs>
+      <g transform="translate(300, 60)"> <!-- manually center text -->
+        <text text-anchor="middle" alignment-baseline="middle" class="loan-text">
+          LoanLen$
+        </text>
+      </g>
+    </svg>      
+    
+    <h2 class="tagline">
+      <span class="typing-text">
+        Instantly check your loan eligibility with precision. No paperwork. No waiting. Just insight.
+      </span>
+    </h2>
+
+    <ul class="features">
+      <li>✔️ Intelligent EMI-to-Income analysis</li>
+      <li>✔️ Accurate risk classification</li>
+      <li>✔️ Fast, secure & compliant with financial standards</li>
+    </ul>
+    <button class="start-button" (click)="navigateToForm()">
+      START NOW <span class="arrow">→</span><span class="arrow">→</span><span class="arrow">→</span>
+    </button>    
+  </div>
 </div>

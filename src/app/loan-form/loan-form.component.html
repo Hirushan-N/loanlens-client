@@ -17,16 +17,18 @@
   <h1>Loan Eligibility Checker</h1>
 
   <form [formGroup]="form" (ngSubmit)="submit()">
-
+    
     <!-- Loan Amount -->
     <div class="form-group">
       <div class="input-wrapper">
         <input
-          type="number"
+          type="text"
           placeholder="Loan Amount (LKR)"
           formControlName="loanAmount"
           #loanAmountInput
           (keydown.enter)="onFieldExit('loanAmount'); $event.preventDefault(); focusNext(interestRateInput)"
+          (keypress)="allowDecimalInput($event, true)"
+          (paste)="blockInvalidPaste($event)"
         />
         <span
           class="invalid-icon-outline"
@@ -40,11 +42,13 @@
     <div class="form-group">
       <div class="input-wrapper">
         <input
-          type="number"
+          type="text"
           placeholder="Interest Rate (%)"
           formControlName="interestRate"
           #interestRateInput
           (keydown.enter)="onFieldExit('interestRate'); $event.preventDefault(); focusNext(tenureInput)"
+          (keypress)="allowDecimalInput($event, true)"
+          (paste)="blockInvalidPaste($event)"
         />
         <span
           class="invalid-icon-outline"
@@ -58,11 +62,13 @@
     <div class="form-group">
       <div class="input-wrapper">
         <input
-          type="number"
+          type="text"
           placeholder="Tenure Duration (Months)"
           formControlName="tenureMonths"
           #tenureInput
           (keydown.enter)="onFieldExit('tenureMonths'); $event.preventDefault(); focusNext(monthlyIncomeInput)"
+          (keypress)="allowDecimalInput($event, false)"
+          (paste)="blockInvalidPaste($event)"
         />
         <span
           class="invalid-icon-outline"
@@ -76,11 +82,13 @@
     <div class="form-group">
       <div class="input-wrapper">
         <input
-          type="number"
+          type="text"
           placeholder="Monthly Income (LKR)"
           formControlName="monthlyIncome"
           #monthlyIncomeInput
           (keydown.enter)="onFieldExit('monthlyIncome'); $event.preventDefault(); handleLastFieldEnter(submitBtn)"
+          (keypress)="allowDecimalInput($event, true)"
+          (paste)="blockInvalidPaste($event)"
         />
         <span
           class="invalid-icon-outline"
@@ -90,6 +98,7 @@
       </div>
     </div>
 
+    <!-- Submit Button -->
     <button
       type="submit"
       [disabled]="form.invalid"

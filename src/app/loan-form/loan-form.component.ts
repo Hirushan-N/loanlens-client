@@ -74,6 +74,41 @@ export class LoanFormComponent {
     return 'Invalid input.';
   }
 
+  allowDecimalInput(event: KeyboardEvent, allowDecimal: boolean): void {
+    const input = event.target as HTMLInputElement;
+    const key = event.key;
+  
+    const isNumber = /^[0-9]$/.test(key);
+    const isDot = key === '.';
+    const currentValue = input.value;
+  
+    if (!isNumber && !(allowDecimal && isDot)) {
+      event.preventDefault();
+      return;
+    }
+  
+    if (allowDecimal && isDot && currentValue.includes('.')) {
+      event.preventDefault();
+      return;
+    }
+  
+    if (allowDecimal && currentValue.includes('.')) {
+      const [_, decimals] = currentValue.split('.');
+      if (decimals && decimals.length >= 2 && input.selectionStart! > currentValue.indexOf('.')) {
+        event.preventDefault();
+      }
+    }
+  }
+  
+  blockInvalidPaste(event: ClipboardEvent): void {
+    const pasted = event.clipboardData?.getData('text') || '';
+    const isValid = /^[0-9]+(\.[0-9]{1,2})?$/.test(pasted);
+    if (!isValid) {
+      event.preventDefault();
+    }
+  }
+  
+
   submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();

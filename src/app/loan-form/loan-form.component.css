@@ -192,3 +192,44 @@ h2 {
   margin-top: 12px;
   color: #90a4ae;
 }
+
+.floating-error {
+  position: fixed;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 59, 59, 0.1);
+  color: #ff6b6b;
+  padding: 12px 24px;
+  border: 1px solid #ff6b6b;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  text-align: center;
+  z-index: 1000;
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+  font-family: 'Segoe UI', sans-serif;
+  animation: dropFade 4s ease forwards;
+}
+
+/* Drop then fade out */
+@keyframes dropFade {
+  0% {
+    top: -60px;
+    opacity: 0;
+  }
+  15% {
+    top: 80px;
+    opacity: 1;
+  }
+  85% {
+    top: 80px;
+    opacity: 1;
+  }
+  100% {
+    top: 80px;
+    opacity: 0;
+  }
+}
+
+

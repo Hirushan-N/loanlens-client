@@ -15,6 +15,7 @@ export class LoanFormComponent {
   form: FormGroup;
   result: LoanResultDto | null = null;
   @ViewChild('loanAmountInput') loanAmountInput!: ElementRef;
+  errorMessage: string | null = null;
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -124,14 +125,21 @@ export class LoanFormComponent {
   
 
   submit(): void {
+    this.errorMessage = null;
+  
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
-
+  
     this.loanService.checkEligibility(this.form.value).subscribe({
-      next: (res) => this.result = res,
-      error: () => alert('Something went wrong. Please try again.')
+      next: (res) => {
+        this.result = res;
+      },
+      error: () => {
+        this.errorMessage = 'Something went wrong. Please try again later.';
+        setTimeout(() => this.errorMessage = null, 4000);
+}
     });
-  }
+  }  
 }

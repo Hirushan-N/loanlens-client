@@ -15,7 +15,7 @@
 
 <div class="form-wrapper">
   <h1>Loan Eligibility Checker</h1>
-
+  
   <form [formGroup]="form" (ngSubmit)="submit()">
     
     <!-- Loan Amount -->
@@ -117,4 +117,8 @@
     <p><strong>Risk Category:</strong> {{ result.riskCategory }}</p>
     <p class="note">* This is a preliminary assessment and not a final loan offer.</p>
   </div>
+</div>
+
+<div class="floating-error" *ngIf="errorMessage">
+  {{ errorMessage }}
 </div>

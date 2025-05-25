@@ -17,46 +17,79 @@
   <h1>Loan Eligibility Checker</h1>
 
   <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <!-- Loan Amount -->
     <div class="form-group">
-      <input
-        type="number"
-        placeholder="Loan Amount (LKR)"
-        formControlName="loanAmount"
-        #loanAmountInput
-        (keydown.enter)="focusNext(interestRateInput)"
-      />
+      <div class="input-wrapper">
+        <input
+          type="number"
+          placeholder="Loan Amount (LKR)"
+          formControlName="loanAmount"
+          #loanAmountInput
+          (keydown.enter)="onFieldExit('loanAmount'); $event.preventDefault(); focusNext(interestRateInput)"
+        />
+        <span
+          class="invalid-icon-outline"
+          *ngIf="isInvalid('loanAmount')"
+          [attr.aria-label]="getErrorMessage('loanAmount')"
+        ></span>
+      </div>
     </div>
-  
+
+    <!-- Interest Rate -->
     <div class="form-group">
-      <input
-        type="number"
-        placeholder="Interest Rate (%)"
-        formControlName="interestRate"
-        #interestRateInput
-        (keydown.enter)="focusNext(tenureInput)"
-      />
+      <div class="input-wrapper">
+        <input
+          type="number"
+          placeholder="Interest Rate (%)"
+          formControlName="interestRate"
+          #interestRateInput
+          (keydown.enter)="onFieldExit('interestRate'); $event.preventDefault(); focusNext(tenureInput)"
+        />
+        <span
+          class="invalid-icon-outline"
+          *ngIf="isInvalid('interestRate')"
+          [attr.aria-label]="getErrorMessage('interestRate')"
+        ></span>
+      </div>
     </div>
-  
+
+    <!-- Tenure Duration -->
     <div class="form-group">
-      <input
-        type="number"
-        placeholder="Tenure Duration (Months)"
-        formControlName="tenureMonths"
-        #tenureInput
-        (keydown.enter)="focusNext(monthlyIncomeInput)"
-      />
+      <div class="input-wrapper">
+        <input
+          type="number"
+          placeholder="Tenure Duration (Months)"
+          formControlName="tenureMonths"
+          #tenureInput
+          (keydown.enter)="onFieldExit('tenureMonths'); $event.preventDefault(); focusNext(monthlyIncomeInput)"
+        />
+        <span
+          class="invalid-icon-outline"
+          *ngIf="isInvalid('tenureMonths')"
+          [attr.aria-label]="getErrorMessage('tenureMonths')"
+        ></span>
+      </div>
     </div>
-  
+
+    <!-- Monthly Income -->
     <div class="form-group">
-      <input
-      type="number"
-      placeholder="Monthly Income (LKR)"
-      formControlName="monthlyIncome"
-      #monthlyIncomeInput
-      (keydown.enter)="handleLastFieldEnter(submitBtn)"
-    />    
+      <div class="input-wrapper">
+        <input
+          type="number"
+          placeholder="Monthly Income (LKR)"
+          formControlName="monthlyIncome"
+          #monthlyIncomeInput
+          (keydown.enter)="onFieldExit('monthlyIncome'); $event.preventDefault(); handleLastFieldEnter(submitBtn)"
+        />
+        <span
+          class="invalid-icon-outline"
+          *ngIf="isInvalid('monthlyIncome')"
+          [attr.aria-label]="getErrorMessage('monthlyIncome')"
+        ></span>
+      </div>
     </div>
-  
+
     <button
       type="submit"
       [disabled]="form.invalid"
@@ -65,8 +98,9 @@
     >
       Check Eligibility
     </button>
-  </form>  
-  
+  </form>
+
+  <!-- Result -->
   <div class="result-box" *ngIf="result">
     <h2>{{ result.isEligible ? '✅ Eligible' : '❌ Not Eligible' }}</h2>
     <p><strong>EMI:</strong> Rs. {{ result.emi | number: '1.2-2' }}</p>

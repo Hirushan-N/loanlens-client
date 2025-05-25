@@ -81,18 +81,74 @@ h1 {
   margin-bottom: 24px;
 }
 
-input {
-  width: 100%;
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
   margin-bottom: 12px;
+}
+
+.input-wrapper input {
+  width: 100%;
   padding: 10px;
+  padding-right: 40px;
   border: none;
   border-radius: 8px;
   background-color: #061529;
   color: white;
   font-size: 15px;
+  box-sizing: border-box;
 }
 
-/* Keyboard focus highlight */
+/* Invalid Icon */
+.invalid-icon-outline {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  color: #00e5ff;
+  background: transparent;
+  cursor: help;
+  transition: transform 0.3s ease, color 0.3s ease;
+  z-index: 2;
+}
+
+.invalid-icon-outline:hover {
+  transform: translateY(-50%) scale(1.15);
+  color: #00c6ff;
+}
+
+.invalid-icon-outline::before {
+  content: "⚠";
+}
+
+/* tooltip Styling */
+.invalid-icon-outline::after {
+  content: attr(aria-label);
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #112b45;
+  color: #e0f7fa;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  border: 1px solid #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.25);
+  transition: opacity 0.3s ease;
+  z-index: 99;
+}
+
+.invalid-icon-outline:hover::after {
+  opacity: 1;
+}
+
+/* Keyboard focus */
 input:focus,
 button:focus {
   outline: 2px solid #00e5ff;

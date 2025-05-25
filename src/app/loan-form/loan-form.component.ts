@@ -17,7 +17,6 @@ export class LoanFormComponent {
   @ViewChild('loanAmountInput') loanAmountInput!: ElementRef;
 
   ngAfterViewInit(): void {
-    // Give it a slight delay to ensure rendering is complete
     setTimeout(() => {
       this.loanAmountInput?.nativeElement.focus();
     }, 100);
@@ -74,7 +73,7 @@ export class LoanFormComponent {
   
     return 'Invalid input.';
   }
-  
+
   submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();

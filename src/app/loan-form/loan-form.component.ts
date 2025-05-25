@@ -31,10 +31,10 @@ export class LoanFormComponent {
 
   constructor(private fb: FormBuilder, private loanService: LoanService) {
     this.form = this.fb.group({
-      loanAmount: [null, [Validators.required, Validators.min(1000)]],
+      loanAmount: [null, [Validators.required, Validators.min(1000),Validators.maxLength(16)]],
       interestRate: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
-      tenureMonths: [null, [Validators.required, Validators.min(1), Validators.max(480)]],
-      monthlyIncome: [null, [Validators.required, Validators.min(1)]]
+      tenureMonths: [null, [Validators.required, Validators.min(1), Validators.max(480),Validators.maxLength(16)]],
+      monthlyIncome: [null, [Validators.required, Validators.min(1),Validators.maxLength(16)]]
     });
   }
 
@@ -123,6 +123,16 @@ export class LoanFormComponent {
       }
   
     }
+
+    if (controlName === 'tenureMonths' && beforeDot?.length >= 3 && !currentValue.includes('.') && isNumber) {
+      event.preventDefault();
+      return;
+    }
+
+    if ((controlName === 'loanAmount' || controlName === 'monthlyIncome') && beforeDot?.length >= 16 && !currentValue.includes('.') && isNumber) {
+      event.preventDefault();
+      return;
+    }
   }  
   
   blockInvalidPaste(event: ClipboardEvent): void {
@@ -133,7 +143,6 @@ export class LoanFormComponent {
     }
   }
   
-
   submit(): void {
     this.errorMessage = null;
   

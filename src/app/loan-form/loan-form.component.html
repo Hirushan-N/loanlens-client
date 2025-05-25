@@ -31,7 +31,7 @@
           (keydown.enter)="onFieldExit('loanAmount'); $event.preventDefault(); focusNext(interestRateInput)"
           (keydown.arrowdown)="focusNext(interestRateInput)"
           (keydown.arrowup)="focusPrevious(loanAmountInput)"
-          (keypress)="allowDecimalInput($event, true)"
+          (keypress)="allowDecimalInput($event, true,'loanAmount')"
           (paste)="blockInvalidPaste($event)"
         />
         <span class="invalid-icon-outline" *ngIf="isInvalid('loanAmount')" [attr.aria-label]="getErrorMessage('loanAmount')">
@@ -75,7 +75,7 @@
           (keydown.enter)="onFieldExit('tenureMonths'); $event.preventDefault(); focusNext(monthlyIncomeInput)"
           (keydown.arrowdown)="focusNext(monthlyIncomeInput)"
           (keydown.arrowup)="focusPrevious(interestRateInput)"
-          (keypress)="allowDecimalInput($event, false)"
+          (keypress)="allowDecimalInput($event, false,'tenureMonths')"
           (paste)="blockInvalidPaste($event)"
         />
         <span class="invalid-icon-outline" *ngIf="isInvalid('tenureMonths')" [attr.aria-label]="getErrorMessage('tenureMonths')">
@@ -96,7 +96,7 @@
           #monthlyIncomeInput
           (keydown.enter)="onFieldExit('monthlyIncome'); $event.preventDefault(); handleLastFieldEnter(submitBtn)"
           (keydown.arrowup)="focusPrevious(tenureInput)"
-          (keypress)="allowDecimalInput($event, true)"
+          (keypress)="allowDecimalInput($event, true,'monthlyIncome')"
           (paste)="blockInvalidPaste($event)"
         />
         <span class="invalid-icon-outline" *ngIf="isInvalid('monthlyIncome')" [attr.aria-label]="getErrorMessage('monthlyIncome')">

@@ -18,24 +18,55 @@
 
   <form [formGroup]="form" (ngSubmit)="submit()">
     <div class="form-group">
-      <input type="number" placeholder="Loan Amount (LKR)" formControlName="loanAmount" />
+      <input
+        type="number"
+        placeholder="Loan Amount (LKR)"
+        formControlName="loanAmount"
+        #loanAmountInput
+        (keydown.enter)="focusNext(interestRateInput)"
+      />
     </div>
-
+  
     <div class="form-group">
-      <input type="number" placeholder="Interest Rate (%)" formControlName="interestRate" />
+      <input
+        type="number"
+        placeholder="Interest Rate (%)"
+        formControlName="interestRate"
+        #interestRateInput
+        (keydown.enter)="focusNext(tenureInput)"
+      />
     </div>
-
+  
     <div class="form-group">
-      <input type="number" placeholder="Tenure Duration (Months)" formControlName="tenureMonths" />
+      <input
+        type="number"
+        placeholder="Tenure Duration (Months)"
+        formControlName="tenureMonths"
+        #tenureInput
+        (keydown.enter)="focusNext(monthlyIncomeInput)"
+      />
     </div>
-
+  
     <div class="form-group">
-      <input type="number" placeholder="Monthly Income (LKR)" formControlName="monthlyIncome" />
+      <input
+      type="number"
+      placeholder="Monthly Income (LKR)"
+      formControlName="monthlyIncome"
+      #monthlyIncomeInput
+      (keydown.enter)="handleLastFieldEnter(submitBtn)"
+    />    
     </div>
-
-    <button type="submit" [disabled]="form.invalid">Check Eligibility</button>
-  </form>
-
+  
+    <button
+      type="submit"
+      [disabled]="form.invalid"
+      #submitBtn
+      (keydown.enter)="focusFirstInvalid()"
+    >
+      Check Eligibility
+    </button>
+  </form>  
+  
   <div class="result-box" *ngIf="result">
     <h2>{{ result.isEligible ? '✅ Eligible' : '❌ Not Eligible' }}</h2>
     <p><strong>EMI:</strong> Rs. {{ result.emi | number: '1.2-2' }}</p>

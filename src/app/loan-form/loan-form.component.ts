@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoanService } from '../core/services/loan.service';
@@ -14,6 +14,14 @@ import { LoanResultDto } from '../core/models/loan.model';
 export class LoanFormComponent {
   form: FormGroup;
   result: LoanResultDto | null = null;
+  @ViewChild('loanAmountInput') loanAmountInput!: ElementRef;
+
+  ngAfterViewInit(): void {
+    // Give it a slight delay to ensure rendering is complete
+    setTimeout(() => {
+      this.loanAmountInput?.nativeElement.focus();
+    }, 100);
+  }
 
   constructor(private fb: FormBuilder, private loanService: LoanService) {
     this.form = this.fb.group({
@@ -24,6 +32,49 @@ export class LoanFormComponent {
     });
   }
 
+  focusNext(nextEl: HTMLElement): void {
+    nextEl.focus();
+  }
+
+  handleLastFieldEnter(submitBtn: HTMLElement): void {
+    if (this.form.valid) {
+      submitBtn.focus();
+    } else {
+      this.focusFirstInvalid();
+    }
+  }  
+  
+  focusFirstInvalid(): void {
+    const firstInvalidControl = Object.keys(this.form.controls).find(key => this.form.get(key)?.invalid);
+    if (firstInvalidControl) {
+      const el = document.querySelector(`[formControlName="${firstInvalidControl}"]`) as HTMLElement;
+      el?.focus();
+    }
+  }  
+
+  onFieldExit(fieldName: string): void {
+    const control = this.form.get(fieldName);
+    if (control && control.invalid) {
+      control.markAsTouched();
+    }
+  }
+  
+  isInvalid(fieldName: string): boolean {
+    const control = this.form.get(fieldName);
+    return !!(control && control.touched && control.invalid);
+  }
+  
+  getErrorMessage(fieldName: string): string {
+    const control = this.form.get(fieldName);
+    if (!control || !control.errors) return '';
+  
+    if (control.errors['required']) return 'This field is required.';
+    if (control.errors['min']) return `Value must be at least ${control.errors['min'].min}.`;
+    if (control.errors['max']) return `Value cannot exceed ${control.errors['max'].max}.`;
+  
+    return 'Invalid input.';
+  }
+  
   submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();

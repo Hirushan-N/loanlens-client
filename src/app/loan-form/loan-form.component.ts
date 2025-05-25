@@ -38,6 +38,10 @@ export class LoanFormComponent {
     });
   }
 
+  focusPrevious(prevEl: HTMLElement): void {
+    prevEl.focus();
+  }
+  
   focusNext(nextEl: HTMLElement): void {
     nextEl.focus();
   }

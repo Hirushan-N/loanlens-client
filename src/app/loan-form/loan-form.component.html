@@ -15,9 +15,9 @@
 
 <div class="form-wrapper">
   <h1>Loan Eligibility Checker</h1>
-  
+
   <form [formGroup]="form" (ngSubmit)="submit()">
-    
+
     <!-- Loan Amount -->
     <div class="form-group">
       <div class="input-wrapper">
@@ -27,6 +27,8 @@
           formControlName="loanAmount"
           #loanAmountInput
           (keydown.enter)="onFieldExit('loanAmount'); $event.preventDefault(); focusNext(interestRateInput)"
+          (keydown.arrowdown)="focusNext(interestRateInput)"
+          (keydown.arrowup)="focusPrevious(loanAmountInput)"
           (keypress)="allowDecimalInput($event, true)"
           (paste)="blockInvalidPaste($event)"
         />
@@ -47,6 +49,8 @@
           formControlName="interestRate"
           #interestRateInput
           (keydown.enter)="onFieldExit('interestRate'); $event.preventDefault(); focusNext(tenureInput)"
+          (keydown.arrowdown)="focusNext(tenureInput)"
+          (keydown.arrowup)="focusPrevious(loanAmountInput)"
           (keydown)="allowDecimalInput($event, true, 'interestRate')"
           (paste)="blockInvalidPaste($event)"
         />
@@ -67,6 +71,8 @@
           formControlName="tenureMonths"
           #tenureInput
           (keydown.enter)="onFieldExit('tenureMonths'); $event.preventDefault(); focusNext(monthlyIncomeInput)"
+          (keydown.arrowdown)="focusNext(monthlyIncomeInput)"
+          (keydown.arrowup)="focusPrevious(interestRateInput)"
           (keypress)="allowDecimalInput($event, false)"
           (paste)="blockInvalidPaste($event)"
         />
@@ -87,6 +93,7 @@
           formControlName="monthlyIncome"
           #monthlyIncomeInput
           (keydown.enter)="onFieldExit('monthlyIncome'); $event.preventDefault(); handleLastFieldEnter(submitBtn)"
+          (keydown.arrowup)="focusPrevious(tenureInput)"
           (keypress)="allowDecimalInput($event, true)"
           (paste)="blockInvalidPaste($event)"
         />
@@ -109,43 +116,36 @@
     </button>
   </form>
 
-  <!-- Result -->
- <!-- Result -->
-<div class="result-box" *ngIf="result">
-  <h2 [ngClass]="result.isEligible ? 'result-title status-eligible' : 'result-title status-not-eligible'">
-    <span class="status-icon">
-      {{ result.isEligible ? '✅' : '❌' }}
-    </span>
-    <span class="status-text">
-      {{ result.isEligible ? 'Loan Eligible' : 'Loan Not Eligible' }}
-    </span>
-  </h2>
-  
+  <!-- Result Box -->
+  <div class="result-box" *ngIf="result">
+    <h2 [ngClass]="result.isEligible ? 'result-title status-eligible' : 'result-title status-not-eligible'">
+      <span class="status-icon">{{ result.isEligible ? '✅' : '❌' }}</span>
+      <span class="status-text">{{ result.isEligible ? 'Eligible' : 'Not Eligible' }}</span>
+    </h2>
 
-  <div class="result-metrics">
-    <div class="metric">
-      <label>💰 Estimated EMI:</label>
-      <div class="value">Rs. {{ result.emi | number: '1.2-2' }}</div>
+    <div class="result-metrics">
+      <div class="metric">
+        <label>💰 Estimated EMI:</label>
+        <div class="value">Rs. {{ result.emi | number: '1.2-2' }}</div>
+      </div>
+      <div class="metric">
+        <label>📊 EMI to Income Ratio:</label>
+        <div class="value">{{ result.emiRatio }}%</div>
+      </div>
+      <div class="metric">
+        <label>🛡️ Risk Classification:</label>
+        <div class="value risk">{{ result.riskCategory || 'N/A' }}</div>
+      </div>
     </div>
 
-    <div class="metric">
-      <label>📊 EMI to Income Ratio:</label>
-      <div class="value">{{ result.emiRatio }}%</div>
-    </div>
-
-    <div class="metric">
-      <label>🛡️ Risk Classification:</label>
-      <div class="value risk">{{ result.riskCategory || 'N/A' }}</div>
-    </div>
+    <p class="note">
+      📌 <strong>Disclaimer:</strong> This is a preliminary eligibility assessment based on the provided data.
+      This result does not constitute a loan offer.
+    </p>
   </div>
-
-  <p class="note">
-    📌 <strong>Disclaimer:</strong> This is a preliminary eligibility assessment based on the provided data.
-    This result does not constitute a loan offer.
-  </p>
-</div>
 </div>
 
+<!-- Floating Error -->
 <div class="floating-error" *ngIf="errorMessage">
   {{ errorMessage }}
 </div>

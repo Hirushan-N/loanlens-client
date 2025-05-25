@@ -47,7 +47,7 @@
           formControlName="interestRate"
           #interestRateInput
           (keydown.enter)="onFieldExit('interestRate'); $event.preventDefault(); focusNext(tenureInput)"
-          (keypress)="allowDecimalInput($event, true)"
+          (keydown)="allowDecimalInput($event, true, 'interestRate')"
           (paste)="blockInvalidPaste($event)"
         />
         <span

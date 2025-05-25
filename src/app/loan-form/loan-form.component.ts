@@ -74,31 +74,45 @@ export class LoanFormComponent {
     return 'Invalid input.';
   }
 
-  allowDecimalInput(event: KeyboardEvent, allowDecimal: boolean): void {
+  allowDecimalInput(event: KeyboardEvent, allowDecimal: boolean, controlName?: string): void {
     const input = event.target as HTMLInputElement;
     const key = event.key;
-  
+    const currentValue = input.value;
     const isNumber = /^[0-9]$/.test(key);
     const isDot = key === '.';
-    const currentValue = input.value;
+  
+    const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Delete', 'Tab'];
+    if (allowedKeys.includes(key)) return;
   
     if (!isNumber && !(allowDecimal && isDot)) {
       event.preventDefault();
       return;
     }
   
-    if (allowDecimal && isDot && currentValue.includes('.')) {
+    if (isDot && currentValue.includes('.')) {
       event.preventDefault();
       return;
     }
   
+    const [beforeDot, afterDot] = currentValue.split('.');
+  
     if (allowDecimal && currentValue.includes('.')) {
-      const [_, decimals] = currentValue.split('.');
-      if (decimals && decimals.length >= 2 && input.selectionStart! > currentValue.indexOf('.')) {
+      if (afterDot?.length >= 2 && input.selectionStart! > currentValue.indexOf('.')) {
         event.preventDefault();
+        return;
       }
     }
-  }
+  
+    if (controlName === 'interestRate') {
+      const selectionStart = input.selectionStart || 0;
+  
+      if (!currentValue.includes('.') && beforeDot?.length >= 2 && selectionStart <= beforeDot.length && isNumber) {
+        event.preventDefault();
+        return;
+      }
+  
+    }
+  }  
   
   blockInvalidPaste(event: ClipboardEvent): void {
     const pasted = event.clipboardData?.getData('text') || '';

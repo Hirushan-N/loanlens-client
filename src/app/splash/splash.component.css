@@ -150,3 +150,16 @@
   50% { transform: translateX(5px); opacity: 1; }
   100% { transform: translateX(0); opacity: 0.5; }
 }
+
+/* smooth navigation  */
+.fade-out {
+  animation: splashExit 0.7s ease forwards;
+}
+
+@keyframes splashExit {
+  to {
+    opacity: 0;
+    transform: translateY(-60px);
+  }
+}
+

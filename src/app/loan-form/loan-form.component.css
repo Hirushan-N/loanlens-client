@@ -3,6 +3,59 @@ body {
   font-family: 'Segoe UI', sans-serif;
 }
 
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  animation: logoDrop 0.8s ease forwards;
+}
+
+@keyframes logoDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px) scale(1.3);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.logo {
+  width: 100%;
+  max-width: 400px;
+}
+
+.loan-text {
+  font-size: 64px;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 700;
+  fill: none;
+  stroke: #00e5ff;
+  stroke-width: 2;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawText 2.5s ease-out forwards, fillGradient 1s ease 2.5s forwards;
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.3);
+}
+
+@keyframes drawText {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fillGradient {
+  0% {
+    fill: transparent;
+  }
+  100% {
+    fill: url(#logoGradient);
+  }
+}
+
 .form-wrapper {
   background-color: #0f2a4c;
   color: #e0f7fa;
@@ -11,6 +64,16 @@ body {
   padding: 30px;
   border-radius: 16px;
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+  animation: formFadeIn 1s ease 0.5s forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes formFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 h1 {

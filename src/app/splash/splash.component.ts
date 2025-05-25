@@ -13,6 +13,12 @@ export class SplashComponent {
   constructor(private router: Router) {}
 
   navigateToForm(): void {
-    this.router.navigate(['/loan']);
+    const splash = document.querySelector('.splash-container');
+    splash?.classList.add('fade-out');
+  
+    setTimeout(() => {
+      this.router.navigate(['/loan']);
+    }, 700);
   }
+  
 }

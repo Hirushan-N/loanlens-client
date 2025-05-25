@@ -21,13 +21,19 @@ export class LoanFormComponent {
     setTimeout(() => {
       this.loanAmountInput?.nativeElement.focus();
     }, 100);
+
+    this.form.valueChanges.subscribe(() => {
+      if (this.result) {
+        this.result = null;
+      }
+    });    
   }
 
   constructor(private fb: FormBuilder, private loanService: LoanService) {
     this.form = this.fb.group({
       loanAmount: [null, [Validators.required, Validators.min(1000)]],
       interestRate: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
-      tenureMonths: [null, [Validators.required, Validators.min(1)]],
+      tenureMonths: [null, [Validators.required, Validators.min(1), Validators.max(480)]],
       monthlyIncome: [null, [Validators.required, Validators.min(1)]]
     });
   }

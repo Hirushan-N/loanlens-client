@@ -1,0 +1,173 @@
+/* Splash Fullscreen Background */
+.splash-container {
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  color: #e0f7fa;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+}
+
+/* Card Container */
+.splash-card {
+  max-width: 800px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Logo Title */
+.logo {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 24px;
+}
+
+.loan-text {
+  font-size: 64px;
+  font-weight: 700;
+  fill: none;
+  stroke: #00e5ff;
+  stroke-width: 2;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawText 6s ease-out forwards, fillGradient 1s ease 6s forwards;
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.3);
+}
+
+@keyframes drawText {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes fillGradient {
+  0%   { fill: transparent; }
+  100% { fill: url(#logoGradient); }
+}
+
+/* Typing Animation Tagline */
+.tagline {
+  font-size: 18px;
+  margin-bottom: 28px;
+  max-width: 700px;
+  line-height: 1.6;
+}
+
+.typing-text {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid #00e5ff;
+  animation: typing 4s steps(75, end), blink-caret 0.75s step-end infinite;
+  max-width: 100%;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50%      { border-color: #00e5ff; }
+}
+
+/* Features */
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+  font-size: 16px;
+  color: #b0eaff;
+}
+
+.features li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s forwards;
+}
+
+.features li:nth-child(1) { animation-delay: 1.4s; }
+.features li:nth-child(2) { animation-delay: 1.8s; }
+.features li:nth-child(3) { animation-delay: 2.2s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.icon-check {
+  width: 18px;
+  height: 18px;
+  fill: #00e676;
+  flex-shrink: 0;
+}
+
+/* CTA Button */
+.start-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 40px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #00eaff;
+  background-color: #0a1a29;
+  border: 2px solid #00eaff;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.4), inset 0 0 6px rgba(0, 229, 255, 0.1);
+  backdrop-filter: blur(3px);
+}
+
+.start-button:hover {
+  background-color: #00eaff;
+  color: #0a1a29;
+  box-shadow: 0 0 20px #00eaff, 0 0 30px rgba(0, 229, 255, 0.4);
+  transform: scale(1.05);
+}
+
+.arrow-icon {
+  width: 16px;
+  height: 16px;
+  stroke: #00c6ff;
+  stroke-width: 2;
+  fill: none;
+  animation: moveArrow 1.2s infinite;
+}
+
+.arrow-icon:nth-of-type(2) { animation-delay: 0.15s; }
+.arrow-icon:nth-of-type(3) { animation-delay: 0.3s; }
+
+@keyframes moveArrow {
+  0%   { transform: translateX(0); opacity: 0.5; }
+  50%  { transform: translateX(5px); opacity: 1; }
+  100% { transform: translateX(0); opacity: 0.5; }
+}
+
+/* Optional: Fade out on transition */
+.fade-out {
+  animation: splashExit 0.7s ease forwards;
+}
+
+@keyframes splashExit {
+  to {
+    opacity: 0;
+    transform: translateY(-60px);
+  }
+}
